@@ -578,7 +578,7 @@ ol {
 	width: 162px;
 	height: 162px;
 	border-radius: 50%;
-	background: #fd340d;
+	background: #A08B78;
 	text-align: center;
 	padding-top: 20px;
 	-webkit-transform: rotate(45deg);
@@ -592,7 +592,7 @@ ol {
 	content: "";
 	width: calc(100% - 10px);
 	height: calc(100% - 10px);
-	border: 1px solid #f96790;
+	border: 1px solid #2C334F;
 	left: 5px;
 	top: 5px;
 	border-radius: 50%;
