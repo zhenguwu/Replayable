@@ -91,12 +91,17 @@ ol {
 	box-shadow: 0 0 3px black;
 }
 
+#banner-text {
+	font-size: 20px;
+}
+
 .section-title {
 	text-align: center;
 }
 
 .section-title h2 {
-	font-size: 36px;
+	font-size: 4px;
+
 }
 
 .set-bg {
@@ -592,7 +597,7 @@ ol {
 	content: "";
 	width: calc(100% - 10px);
 	height: calc(100% - 10px);
-	border: 1px solid #2C334F;
+	border: 3px dashed #2C334F;
 	left: 5px;
 	top: 5px;
 	border-radius: 50%;
