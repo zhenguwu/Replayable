@@ -22,6 +22,7 @@
 	<link rel="stylesheet" href="css/owl.carousel.min.css"/>
 	<link rel="stylesheet" href="css/animate.css"/>
 	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/login.css"/>
 
 
 	<!--[if lt IE 9]>
@@ -34,6 +35,28 @@
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
+	</div>
+
+	<div id="login-page-container">
+		<div id="login-page" class="shadow">
+			<div id="login-page-content">
+				
+				<img src="img/logo.png" alt="">
+
+				<form class="contact-form" id="login-form">
+						<input type="text" id="sign-email" class="box-shadow" placeholder="Email">
+						<input type="password" id="sign-password" class="box-shadow" placeholder="Password">
+				</form>
+			</br>
+				<div id="sign-btns">
+					<a class="site-btn box-shadow first-button use-cursor-btn" id="sign-in-btn">Login</a>
+					<div id="btn-break"></div>
+					<a class="site-btn box-shadow use-cursor-btn" id="sign-up-btn">Sign Up</a>
+				</div>
+				
+			</div>
+			<div id="signup-page-content"></div>
+		</div>
 	</div>
 
 	<!-- Header section -->
@@ -49,22 +72,26 @@
 					</div>
 					<div class="col-xl-5 col-lg-5">
 						<form class="header-search-form">
-							<input type="text" placeholder="Search for a console ..." id="search-form">
-							<button><i class="flaticon-search"></i></button>
+							<input type="text" placeholder="Search for a console ..." id="search-form" class="box-shadow">
+							<button class="use-cursor"><i class="flaticon-search"></i></button>
 						</form>
 					</div>
 					<div class="col-xl-4 col-lg-4">
 						<div class="user-panel">
-							<div class="up-item">
+							<div class="up-item use-cursor">
 								<div class="shopping-card">
 									<i class="flaticon-bag"></i>
-									<span class="text-black">0</span>
+									<span>0</span>
 								</div>
-								<a href="#">Cart</a>
+								Cart
 							</div>
-							<div class="up-item">
+							<div class="up-item use-cursor" id="login-btn">
 								<i class="flaticon-profile"></i>
-								<a href="#">Sign</a> In or <a href="#">Create Account</a>
+								Login / Sign Up
+							</div>
+							<div class="up-item use-cursor" id="profile-btn">
+								<i class="flaticon-profile"></i>
+								<span id="profile-username">Username Loading...</span>
 							</div>
 						</div>
 					</div>
@@ -429,7 +456,7 @@
 				<div class="col-lg-4 col-sm-4">
 					<div class="footer-widget about-widget">
 						<h2>About</h2>
-						<p>Replayable is a peer to peer platform for console renting</p>
+						<p>Replayable is a peer to peer </br>platform for console renting</p>
 						<img src="img/cards.png" alt="">
 					</div>
 				</div>
@@ -473,12 +500,9 @@
 			<div class="container">
 				<div class="social-links">
 					<a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
-					<a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
-					<a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>
 					<a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
 					<a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
 					<a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>
-					<a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
 				</div>
 
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> 
@@ -490,7 +514,22 @@
 	</section>
 	<!-- Footer section end -->
 
-
+	<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
+	<script>
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyB2QUU2YzkMa6Cv5WLhgZzJnZsstw6jj7s",
+	    authDomain: "replayable-7ec3f.firebaseapp.com",
+	    databaseURL: "https://replayable-7ec3f.firebaseio.com",
+	    projectId: "replayable-7ec3f",
+	    storageBucket: "replayable-7ec3f.appspot.com",
+	    messagingSenderId: "783202977823",
+	    appId: "1:783202977823:web:2bc6702db7db5ab0076d2a",
+	    measurementId: "G-MV15QFCVY2"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	</script>
 
 	<!--====== Javascripts & Jquery ======-->
 	<script src="js/jquery-3.2.1.min.js"></script>

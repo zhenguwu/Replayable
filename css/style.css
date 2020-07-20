@@ -87,10 +87,25 @@ ol {
   Helper CSS
 -----------------------*/
 
-#search-form {
+.use-cursor:hover {
+	cursor: pointer;
+	color:#fd340d!important;
+	transition: 0.25s;
+}
+
+.use-cursor-btn:hover {
+	cursor: pointer;
+	background-color:#fd340d!important;
+	transition: 0.5s;
+}
+
+.box-shadow {
 	box-shadow: 0 0 3px black;
 }
 
+.user-panel {
+	user-select: none;
+}
 #banner-text {
 	font-size: 20px;
 }
@@ -417,7 +432,6 @@ ol {
 	left: 100%;
 	height: 16px;
 	min-width: 16px;
-	color: #fff;
 	font-size: 13px;
 	background: #f3efe5;
 	text-align: center;
@@ -1142,6 +1156,10 @@ ol {
 	color: #f3efe5;
 	margin-right: 15px;
 	overflow: hidden;
+}
+
+.social-links {
+	text-align: center;
 }
 
 .social-links-warp {

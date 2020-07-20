@@ -14,11 +14,53 @@ $(window).on('load', function() {
 		Preloder
 	--------------------*/
 	$(".loader").fadeOut();
-	$("#preloder").delay(400).fadeOut("slow");
+	$("#preloder").delay(350).fadeOut(350);
 
 });
 
 (function($) {
+
+	firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			$("#login-btn").hide();
+			$("#profile-username").text(user.email);
+			$("#profile-btn").show();
+		} else {
+			$("#profile-btn").hide();
+			$("#login-btn").show();
+		}
+	});
+
+	/*------------------
+		Login
+	--------------------*/
+	$("#login-btn").click(function() {
+		$("#login-page-container").fadeIn(250);
+	});
+
+	$("#login-page-container").click(function() {
+		$("#login-page-container").fadeOut(250);
+	});
+
+	$("#login-page").click(function(e) {
+		e.stopPropagation();
+	});
+
+	$("#sign-in-btn").click(function() {
+		firebase.auth().signInWithEmailAndPassword($("#sign-email").val(), $("#sign-password").val()).then(function(result) {
+			$("#login-page-container").fadeOut(250, function() {
+				$("#sign-email").val("");
+				$("#sign-password").val("");
+			});
+		}, function(error) {
+			$("#login-form").append("<p style='color:red'>Incorrect Email or Password</p>");
+		});
+	});
+
+	$("#profile-btn").click(function() {
+		firebase.auth().signOut();
+	})
+
 	/*------------------
 		Navigation
 	--------------------*/
