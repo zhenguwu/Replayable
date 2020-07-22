@@ -22,7 +22,7 @@
 	max-width: 800px;
 }
 
-#login-page-content {
+#login-page-content, #signup-page-content {
 	position: absolute;
 	top: 10%;
 	height: 85%;
@@ -44,14 +44,22 @@
 	margin-top: 20%;
 }
 
+#signup-page-content form {
+	margin-top: 5%;
+}
 
-#login-page-content .site-btn {
+
+#login-page-container .site-btn {
 	margin-top: 5px;
 }
 
-#login-form {
-	width: 70%;
+#login-form, #signup-form {
+	width: 60%;
 	display: inline-block;
+}
+
+#signup-page-content {
+	display: none;
 }
 
 @media (min-width: 1000px) {
@@ -65,7 +73,7 @@
 		max-width: 80%;
 	}
 	#login-form {
-		width: 80%;
+		width: 70%;
 	}
 }
 

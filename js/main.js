@@ -23,7 +23,14 @@ $(window).on('load', function() {
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			$("#login-btn").hide();
-			$("#profile-username").text(user.email);
+			if (user.displayName) {
+				$("#profile-username").text(user.displayName);
+			} else {
+				$("#profile-username").text("Unnamed User");
+				$("#login-page-content").hide();
+				$("#signup-page-content").show();
+				$("#login-page-container").fadeIn(250);
+			}
 			$("#profile-btn").show();
 		} else {
 			$("#profile-btn").hide();
@@ -35,27 +42,87 @@ $(window).on('load', function() {
 		Login
 	--------------------*/
 	$("#login-btn").click(function() {
+		$("#signup-page-content").hide();
+		$("#login-page-content").show();
 		$("#login-page-container").fadeIn(250);
 	});
 
 	$("#login-page-container").click(function() {
-		$("#login-page-container").fadeOut(250);
+		if (!isSigningUp) {
+			$("#login-page-container").fadeOut(250);
+		}
 	});
 
 	$("#login-page").click(function(e) {
 		e.stopPropagation();
 	});
 
+	$("#login-form input").keypress(function(event) {
+	    if (event.which == 13) {
+	        event.preventDefault();
+	        $("#sign-in-btn").trigger("click");
+	    }
+	});
+
+	$("#signup-form").keypress(function(event) {
+	    if (event.which == 13) {
+	        event.preventDefault();
+	        $("#signup-save-btn").trigger("click");
+	    }
+	});
+
 	$("#sign-in-btn").click(function() {
+		$(".sign-error").remove();
 		firebase.auth().signInWithEmailAndPassword($("#sign-email").val(), $("#sign-password").val()).then(function(result) {
 			$("#login-page-container").fadeOut(250, function() {
 				$("#sign-email").val("");
 				$("#sign-password").val("");
 			});
 		}, function(error) {
-			$("#login-form").append("<p style='color:red'>Incorrect Email or Password</p>");
+			$("#login-form").append("<p style='color:red' class='sign-error'>Incorrect Email or Password</p>");
 		});
 	});
+
+	var isSigningUp = false;
+
+	$("#sign-up-btn").click(function() {
+		$(".sign-error").remove();
+		firebase.auth().createUserWithEmailAndPassword($("#sign-email").val(), $("#sign-password").val()).then(function(result) {
+			isSigningUp = true;
+			$("#login-page-content").fadeOut(250);
+			$("#signup-page-content").fadeIn(250);
+		}, function(error) {
+			var errorCode = error.code;
+			if (errorCode == "auth/email-already-in-use") {
+				$("#login-form").append("<p style='color:red' class='sign-error'>Email Already Linked to an Account</p>");
+			} else if (errorCode == "auth/invalid-email") {
+				$("#login-form").append("<p style='color:red' class='sign-error'>Invalid Email Address</p>");
+			} else if (errorCode == "auth/weak-password") {
+				$("#login-form").append("<p style='color:red' class='sign-error'>Password Is Too Weak</p>");
+			}
+		});
+	})
+
+	$("#signup-save-btn").click(function() {
+		$(".sign-error").remove();
+		var newName = $("#sign-username").val();
+		if (newName != "") {
+			firebase.auth().currentUser.updateProfile({
+				displayName: newName
+			}).then(function() {
+				$("#profile-username").text(newName);
+				$("#login-page-container").fadeOut(250, function() {
+					$("#sign-email").val("");
+					$("#sign-password").val("");
+					$("#sign-username").val("");
+				});
+			}).catch(function(error) {
+				console.log(error.code);
+			});
+		} else {
+			$("#signup-form").append("<p style='color:red' class='sign-error'>Display Name Cannot Be Empty</p>");
+		}
+	})
 
 	$("#profile-btn").click(function() {
 		firebase.auth().signOut();
